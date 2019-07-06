@@ -8,12 +8,40 @@
 
 import UIKit
 
-class StoriesCell: UITableViewCell {
+class StoriesCell: UITableViewCell , UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+    
 
+    
+   
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+   
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+       
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photo", for: indexPath)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 50, height: 50)
+    }
+    
+  
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
